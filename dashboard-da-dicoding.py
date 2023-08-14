@@ -102,7 +102,7 @@ st.pyplot(fig)
 st.subheader("Customer Demographics")
 
 # List of colors to be used in the plot
-colors = ['#08519c', '#3182bd', '#6baed6', '#bdd7e7', '#eff3ff']
+colors = ['#00286b', '#0d54a0', '#547fd0', '#88adfd', '#c1e3ff']
 
 # Creating a figure with dimensions 10x6 inches
 plt.figure(figsize=(10, 6))
@@ -116,8 +116,7 @@ sns.barplot(
 )
 
 # Font settings for the plot title
-font = {'family': 'cursive',
-        'color': '#08519c',
+font = {'color': '#00286b',
         'weight': 'normal',
         'size': 13,
         }
@@ -140,18 +139,16 @@ st.subheader("Best & Worst Performing Product")
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(24, 6))
 
 # Define colors
-colors1 = ['#006d2c','#edf8e9','#edf8e9','#edf8e9','#edf8e9']
-colors2 = ['#bd0026','#fee5d9','#fee5d9','#fee5d9','#fee5d9']
+colors1 = ['#006d2c','#74c476','#74c476','#74c476','#74c476']
+colors2 = ['#bd0026','#fd8d3c','#fd8d3c','#fd8d3c','#fd8d3c']
 
 # Font settings for the plot title
-font1 = {'family': 'cursive',
-        'color':  '#006d2c',
+font1 = {'color': '#006d2c',
         'weight': 'normal',
         'size': 15,
         }
 
-font2 = {'family': 'cursive',
-        'color':  '#bd0026',
+font2 = {'color': '#bd0026',
         'weight': 'normal',
         'size': 15,
         }
