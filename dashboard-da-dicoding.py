@@ -83,7 +83,7 @@ st.subheader('Daily Orders')
 
 col1 = st.columns(1)
 
-with col1:
+with col1[0]:  # Access the first (and only) column in the tuple
     total_revenue = format_currency(daily_orders_df.revenue.sum(), "USD", locale='es_CO')
     st.metric("Total Revenue", value=total_revenue)
 
@@ -111,7 +111,7 @@ plt.figure(figsize=(10, 6))
 # Creating a bar plot using seaborn
 sns.barplot(
     x="customer_state",
-    y="customer_count",
+    y="customer_id",
     data=top_5_states_df,
     palette=colors
 )
@@ -158,14 +158,16 @@ font2 = {'family': 'cursive',
          }
 
 # Plot the best performing products
-sns.barplot(x='order_item_id', y='product_category_name', data=most_sold_category, palette=colors1, ax=ax[0])
+best_category_data = main_df[main_df["product_category_name"] == most_sold_category]
+sns.barplot(x='order_item_id', y='product_category_name', data=best_category_data, palette=colors1, ax=ax[0])
 ax[0].set_ylabel(None)
 ax[0].set_xlabel(None)
 ax[0].set_title("Top 5 Best Selling Product Categories", loc="center", fontsize=15, fontdict=font1)
 ax[0].tick_params(axis='y', labelsize=12)
 
 # Plot the worst performing products
-sns.barplot(x='order_item_id', y='product_category_name', data=least_sold_category, palette=colors2, ax=ax[1])
+worst_category_data = main_df[main_df["product_category_name"] == least_sold_category]
+sns.barplot(x='order_item_id', y='product_category_name', data=worst_category_data, palette=colors2, ax=ax[1])
 ax[1].set_ylabel(None)
 ax[1].set_xlabel(None)
 ax[1].invert_xaxis()
