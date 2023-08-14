@@ -23,13 +23,9 @@ def create_daily_orders_df(df):
     return daily_orders_df
 
 
-def create_most_and_least_sold_categories(df):
-    most_and_least_sold_categories = df.groupby('product_category_name')['order_item_id'].sum().sort_values(
-        ascending=False).reset_index()
-    most_sold_category = most_and_least_sold_categories.iloc[0]
-    least_sold_category = most_and_least_sold_categories.iloc[-1]
-    return most_sold_category['product_category_name'], least_sold_category['product_category_name']
-
+def create_category_sales(df):
+    category_sales = all_data.groupby('product_category_name')['order_item_id'].sum().sort_values(ascending=False).reset_index()
+    return category_sales
 
 def create_top_5_states_df(df):
     top_5_states_df = df.groupby(by='customer_state').customer_id.nunique().sort_values(
@@ -73,7 +69,7 @@ main_df = all_data[
     ]
 
 daily_orders_df = create_daily_orders_df(main_df)
-most_sold_category, least_sold_category = create_most_and_least_sold_categories(main_df)
+category_sales = create_category_sales(main_df)
 top_5_states_df = create_top_5_states_df(main_df)
 rfm_df = create_rfm_df(main_df)
 
@@ -141,33 +137,31 @@ st.subheader("Best & Worst Performing Product")
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(24, 6))
 
 # Define colors
-colors1 = ['#006d2c', '#edf8e9', '#edf8e9', '#edf8e9', '#edf8e9']
-colors2 = ['#bd0026', '#fee5d9', '#fee5d9', '#fee5d9', '#fee5d9']
+colors1 = ['#006d2c','#edf8e9','#edf8e9','#edf8e9','#edf8e9']
+colors2 = ['#bd0026','#fee5d9','#fee5d9','#fee5d9','#fee5d9']
 
 # Font settings for the plot title
 font1 = {'family': 'cursive',
-         'color': '#006d2c',
-         'weight': 'normal',
-         'size': 15,
-         }
+        'color':  '#006d2c',
+        'weight': 'normal',
+        'size': 15,
+        }
 
 font2 = {'family': 'cursive',
-         'color': '#bd0026',
-         'weight': 'normal',
-         'size': 15,
-         }
+        'color':  '#bd0026',
+        'weight': 'normal',
+        'size': 15,
+        }
 
 # Plot the best performing products
-best_category_data = main_df[main_df["product_category_name"] == most_sold_category]
-sns.barplot(x='order_item_id', y='product_category_name', data=best_category_data, palette=colors1, ax=ax[0])
+sns.barplot(x='order_item_id', y='product_category_name', data=category_sales.head(5), palette=colors1, ax=ax[0])
 ax[0].set_ylabel(None)
 ax[0].set_xlabel(None)
 ax[0].set_title("Top 5 Best Selling Product Categories", loc="center", fontsize=15, fontdict=font1)
-ax[0].tick_params(axis='y', labelsize=12)
+ax[0].tick_params(axis ='y', labelsize=12)
 
 # Plot the worst performing products
-worst_category_data = main_df[main_df["product_category_name"] == least_sold_category]
-sns.barplot(x='order_item_id', y='product_category_name', data=worst_category_data, palette=colors2, ax=ax[1])
+sns.barplot(x='order_item_id', y='product_category_name', data=category_sales.sort_values(by="order_item_id", ascending=True).head(5), palette=colors2, ax=ax[1])
 ax[1].set_ylabel(None)
 ax[1].set_xlabel(None)
 ax[1].invert_xaxis()
