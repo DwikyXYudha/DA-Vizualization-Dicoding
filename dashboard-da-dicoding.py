@@ -80,7 +80,7 @@ st.subheader('Daily Orders')
 col1 = st.columns(1)
 
 with col1[0]:  # Access the first (and only) column in the tuple
-    total_revenue = format_currency(daily_orders_df.revenue.sum(), "USD", locale='es_CO')
+    total_revenue = format_currency(daily_orders_df.revenue.sum(), "USD", locale='en_US')
     st.metric("Total Revenue", value=total_revenue)
 
 fig, ax = plt.subplots(figsize=(16, 8))
@@ -89,10 +89,13 @@ ax.plot(
     daily_orders_df["order_count"],
     marker='o',
     linewidth=2,
-    color="#dd1c77"
+    color="#08519c"
 )
 ax.tick_params(axis='y', labelsize=20)
 ax.tick_params(axis='x', labelsize=15)
+
+# Set the title for the plot
+ax.set_title('Daily Orders Count', fontsize=18)
 
 st.pyplot(fig)
 
@@ -186,7 +189,7 @@ with col2:
     st.metric("Average Frequency", value=avg_frequency)
 
 with col3:
-    avg_frequency = format_currency(rfm_df.monetary.mean(), "AUD", locale='es_CO')
+    avg_frequency = format_currency(rfm_df.monetary.mean(), "USD", locale='en_US')
     st.metric("Average Monetary", value=avg_frequency)
 
 fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(35, 15))
