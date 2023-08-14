@@ -54,6 +54,8 @@ def create_rfm_df(df):
 all_data.sort_values(by="order_purchase_timestamp", inplace=True)
 all_data.reset_index(inplace=True)
 
+all_data["order_purchase_timestamp"] = pd.to_datetime(all_data["order_purchase_timestamp"])
+
 min_date = all_data["order_purchase_timestamp"].min()
 max_date = all_data["order_purchase_timestamp"].max()
 
