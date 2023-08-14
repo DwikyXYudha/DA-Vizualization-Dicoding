@@ -116,8 +116,7 @@ sns.barplot(
 )
 
 # Font settings for the plot title
-font = {'color': '#00286b',
-        'weight': 'normal',
+font = {'weight': 'normal',
         'size': 13,
         }
 
@@ -139,29 +138,26 @@ st.subheader("Best & Worst Performing Product")
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(24, 6))
 
 # Define colors
-colors1 = ['#006d2c','#74c476','#74c476','#74c476','#74c476']
-colors2 = ['#bd0026','#fd8d3c','#fd8d3c','#fd8d3c','#fd8d3c']
+colors = ['#00286b', '#c1e3ff', '#c1e3ff', '#c1e3ff', '#c1e3ff']
 
 # Font settings for the plot title
-font1 = {'color': '#006d2c',
-        'weight': 'normal',
+font1 = {'weight': 'normal',
         'size': 15,
         }
 
-font2 = {'color': '#bd0026',
-        'weight': 'normal',
+font2 = {'weight': 'normal',
         'size': 15,
         }
 
 # Plot the best performing products
-sns.barplot(x='order_item_id', y='product_category_name', data=category_sales.head(5), palette=colors1, ax=ax[0])
+sns.barplot(x='order_item_id', y='product_category_name', data=category_sales.head(5), palette=colors, ax=ax[0])
 ax[0].set_ylabel(None)
 ax[0].set_xlabel(None)
 ax[0].set_title("Top 5 Best Selling Product Categories", loc="center", fontsize=15, fontdict=font1)
 ax[0].tick_params(axis ='y', labelsize=12)
 
 # Plot the worst performing products
-sns.barplot(x='order_item_id', y='product_category_name', data=category_sales.sort_values(by="order_item_id", ascending=True).head(5), palette=colors2, ax=ax[1])
+sns.barplot(x='order_item_id', y='product_category_name', data=category_sales.sort_values(by="order_item_id", ascending=True).head(5), palette=colors, ax=ax[1])
 ax[1].set_ylabel(None)
 ax[1].set_xlabel(None)
 ax[1].invert_xaxis()
