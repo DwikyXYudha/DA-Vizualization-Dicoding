@@ -1,7 +1,7 @@
 # E-Commerce Dashboard ✨
 
 ## Setup environment
-```
+```python
 python -m venv NameYourVenv
 NameYourVenv\Scripts\activate
 pip install -r requirements.txt
@@ -10,4 +10,6 @@ pip install -r requirements.txt
 `NameYourVenv` is the name of the virtual environment. You can replace it with an appropriate name. 
 
 ## Run steamlit app
-`streamlit run dashboard-da-dicoding.py`
+```python
+streamlit run dashboard-da-dicoding.py
+```
