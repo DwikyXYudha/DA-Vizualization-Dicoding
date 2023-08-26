@@ -10,4 +10,4 @@ pip install -r requirements.txt
 `NameYourVenv` is the name of the virtual environment. You can replace it with an appropriate name. 
 
 ## Run steamlit app
-streamlit run dashboard-da-dicoding.py
+`streamlit run dashboard-da-dicoding.py`
